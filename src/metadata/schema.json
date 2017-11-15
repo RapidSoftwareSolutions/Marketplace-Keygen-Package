@@ -1,0 +1,3619 @@
+{
+    "package": "Keygen",
+    "tagline": "Keygen API",
+    "description": "A dead-simple software licensing API built for developers",
+    "image": "https:\/\/logo.clearbit.com\/keygen.sh",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-Keygen-Package",
+    "keywords": [
+        "API",
+        "keygen",
+        "licensing"
+    ],
+    "accounts": {
+        "domain": "keygen.sh\/",
+        "credentials": [
+            "accountId"
+        ]
+    },
+    "steps":[
+        "Browse to https://keygen.sh",
+        "Register or log in",
+        "Browse to https://app.keygen.sh/settings to get your accountId",
+        "Use getAccessToken to generate your access toke"
+    ],
+    "blocks": [
+        {
+            "name": "getAccessToken",
+            "description": "Generate a new token resource for a user.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Your email",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "Your password",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/tokens",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['credentials']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTokenDetails",
+            "description": "Retrieves the details of an existing token.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "tokenId",
+                    "type": "String",
+                    "info": "Id of access token",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/tokens\/{$data['tokenId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateToken",
+            "description": "Regenerate an existing token resource. This will replace the token attribute with a new secure token, and extend the expiry by 2 weeks.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "tokenId",
+                    "type": "String",
+                    "info": "Id of access token",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/tokens\/{$data['tokenId']}",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "revokeToken",
+            "description": "Permanently revokes a token. It cannot be undone. This action also immediately invalidates all sessions using the given token.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "tokenId",
+                    "type": "String",
+                    "info": "Id of access token",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/tokens\/{$data['tokenId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addProduct",
+            "description": "Creates a new product resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the product",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "type": "String",
+                    "info": "Url of the product",
+                    "required": false
+                },
+                {
+                    "name": "platforms",
+                    "type": "List",
+                    "structure": {
+                        "name": "platform",
+                        "type": "String",
+                        "info": "Single platform"
+                    },
+                    "info": "Platofrms of the product",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing product metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/products",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "products",
+                            "attributes": {
+                                "name": "{name}",
+                                "url": "{url}",
+                                "platforms": "{platforms}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleProduct",
+            "description": "Retrieves the details of an existing product.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "productId",
+                    "type": "String",
+                    "info": "Id of product",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/products\/{$data['productId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateProduct",
+            "description": "Updates the details of an existing product.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "productId",
+                    "type": "String",
+                    "info": "Id of product",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the product",
+                    "required": false
+                },
+                {
+                    "name": "url",
+                    "type": "String",
+                    "info": "Url of the product",
+                    "required": false
+                },
+                {
+                    "name": "platforms",
+                    "type": "List",
+                    "structure": {
+                        "name": "platform",
+                        "type": "String",
+                        "info": "Single platform"
+                    },
+                    "info": "Platofrms of the product",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing product metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/products\/{$data['productId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "products",
+                            "attributes": {
+                                "name": "{name}",
+                                "url": "{url}",
+                                "platforms": "{platforms}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteProduct",
+            "description": "Deletes an existing product.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "productId",
+                    "type": "String",
+                    "info": "Id of product",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/products\/{$data['productId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listProducts",
+            "description": "Returns a list of products. The products are returned sorted by creation date, with the most recent products appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of products to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/products",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addPolicy",
+            "description": "Creates a new policy resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the policy",
+                    "required": true
+                },
+                {
+                    "name": "duration",
+                    "type": "Number",
+                    "info": "Duraion of the policy in seconds",
+                    "required": false
+                },
+                {
+                    "name": "strict",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "When enabled, a license that implements the policy will be considered invalid if its machine limit is surpassed. ",
+                    "required": false
+                },
+                {
+                    "name": "floating",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "When enabled, a license that implements the policy will be valid across multiple machines. ",
+                    "required": false
+                },
+                {
+                    "name": "requireCheckIn",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "When enabled, a license that implements the policy will require check-in at a predefined interval to continue to pass validation i.e. if a license misses a check-in, it will be invalidated.",
+                    "required": false
+                },
+                {
+                    "name": "checkInInterval",
+                    "type": "String",
+                    "info": "One of day, week, month or year. The frequency at which a license should check-in.",
+                    "required": false
+                },
+                {
+                    "name": "checkInIntervalCount",
+                    "type": "Number",
+                    "info": "The number of intervals (specified in the check-in interval property) between each required check-in. ",
+                    "required": false
+                },
+                {
+                    "name": "usePool",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not to pull license keys from a finite pool of pre-determined keys. ",
+                    "required": false
+                },
+                {
+                    "name": "maxMachines",
+                    "type": "Number",
+                    "info": "The maximum number of machines a license implementing the policy can activate per-user. This is only enforced when the policy is strict. ",
+                    "required": false
+                },
+                {
+                    "name": "encrypted",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not to encrypt license keys. ",
+                    "required": false
+                },
+                {
+                    "name": "protected",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not the policy is protected",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing policy metadata.",
+                    "required": false
+                },
+                {
+                    "name": "productId",
+                    "type": "String",
+                    "info": "The product the policy is for.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/policies",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "policies",
+                            "attributes": {
+                                "name": "{name}",
+                                "duration": "{duration}",
+                                "strict": "{strict}",
+                                "floating": "{floating}",
+                                "requireCheckIn": "{requireCheckIn}",
+                                "checkInInterval": "{checkInInterval}",
+                                "checkInIntervalCount": "{checkInIntervalCount}",
+                                "usePool": "{usePool}",
+                                "maxMachines": "{maxMachines}",
+                                "encrypted": "{encrypted}",
+                                "protected": "{protected}",
+                                "metadata": "{metadata}"
+                            },
+                            "relationships": {
+                                "product": {
+                                    "data": {
+                                        "type": "products",
+                                        "id": "{productId}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSinglePolicy",
+            "description": "Retrieves the details of an existing policy.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "Id of policy",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/policies\/{$data['policyId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updatePolicy",
+            "description": "Updates the details of an existing policy.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "Id of policy",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the policy",
+                    "required": false
+                },
+                {
+                    "name": "duration",
+                    "type": "Number",
+                    "info": "Duraion of the policy in seconds",
+                    "required": false
+                },
+                {
+                    "name": "strict",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "When enabled, a license that implements the policy will be considered invalid if its machine limit is surpassed. ",
+                    "required": false
+                },
+                {
+                    "name": "floating",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "When enabled, a license that implements the policy will be valid across multiple machines. ",
+                    "required": false
+                },
+                {
+                    "name": "requireCheckIn",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "When enabled, a license that implements the policy will require check-in at a predefined interval to continue to pass validation i.e. if a license misses a check-in, it will be invalidated.",
+                    "required": false
+                },
+                {
+                    "name": "checkInInterval",
+                    "type": "String",
+                    "info": "One of day, week, month or year. The frequency at which a license should check-in.",
+                    "required": false
+                },
+                {
+                    "name": "checkInIntervalCount",
+                    "type": "Number",
+                    "info": "The number of intervals (specified in the check-in interval property) between each required check-in. ",
+                    "required": false
+                },
+                {
+                    "name": "usePool",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not to pull license keys from a finite pool of pre-determined keys. ",
+                    "required": false
+                },
+                {
+                    "name": "maxMachines",
+                    "type": "Number",
+                    "info": "The maximum number of machines a license implementing the policy can activate per-user. This is only enforced when the policy is strict. ",
+                    "required": false
+                },
+                {
+                    "name": "encrypted",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not to encrypt license keys. ",
+                    "required": false
+                },
+                {
+                    "name": "protected",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not the policy is protected",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing policy metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/policies\/{$data['policyId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "policies",
+                            "attributes": {
+                                "name": "{name}",
+                                "duration": "{duration}",
+                                "strict": "{strict}",
+                                "floating": "{floating}",
+                                "requireCheckIn": "{requireCheckIn}",
+                                "checkInInterval": "{checkInInterval}",
+                                "checkInIntervalCount": "{checkInIntervalCount}",
+                                "usePool": "{usePool}",
+                                "maxMachines": "{maxMachines}",
+                                "encrypted": "{encrypted}",
+                                "protected": "{protected}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deletePolicy",
+            "description": "Deletes an existing policy.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "Id of policy",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/policies\/{$data['policyId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listPolicies",
+            "description": "Returns a list of policies. The policies are returned sorted by creation date, with the most recent policies appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of products to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                },
+                {
+                    "name": "product",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the product to filter by.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/policies",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]",
+                            "product"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createUser",
+            "description": "Creates a new user resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "String",
+                    "info": "The first name of the user.",
+                    "required": true
+                },
+                {
+                    "name": "lastName",
+                    "type": "String",
+                    "info": "The last name of the user.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The email of the user.",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "The password of the user.",
+                    "required": true
+                },
+                {
+                    "name": "role",
+                    "type": "Select",
+                    "options": [
+                        "user",
+                        "admin"
+                    ],
+                    "info": "The role of the user.",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing user metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "users",
+                            "attributes": {
+                                "firstName": "{firstName}",
+                                "lastName": "{lastName}",
+                                "email": "{email}",
+                                "password": "{password}",
+                                "role": "{role}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleUser",
+            "description": "Retrieves the details of an existing user.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of user",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users\/{$data['userId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateUser",
+            "description": "Updates the details of an existing user.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of user",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "String",
+                    "info": "The first name of the user.",
+                    "required": false
+                },
+                {
+                    "name": "lastName",
+                    "type": "String",
+                    "info": "The last name of the user.",
+                    "required": false
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The email of the user.",
+                    "required": false
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "The password of the user.",
+                    "required": false
+                },
+                {
+                    "name": "role",
+                    "type": "Select",
+                    "options": [
+                        "user",
+                        "admin"
+                    ],
+                    "info": "The role of the user.",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing user metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users\/{$data['userId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "users",
+                            "attributes": {
+                                "firstName": "{firstName}",
+                                "lastName": "{lastName}",
+                                "email": "{email}",
+                                "password": "{password}",
+                                "role": "{role}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteUser",
+            "description": "Deletes an existing user.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of user",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users\/{$data['userId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listUsers",
+            "description": "Returns a list of users. The users are returned sorted by creation date, with the most recent users appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of users to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateUserPassword",
+            "description": "Action to update the user's password. A user's password can only be updated when authenticated as the given user.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of user",
+                    "required": true
+                },
+                {
+                    "name": "oldPassword",
+                    "type": "String",
+                    "info": "The current password for the user.",
+                    "required": true
+                },
+                {
+                    "name": "newPassword",
+                    "type": "String",
+                    "info": "The new password for the user.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users\/{$data['userId']}\/actions\/update-password",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "meta": {
+                            "oldPassword": "{oldPassword}",
+                            "newPassword": "{newPassword}"
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "meta"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "resetUserPassword",
+            "description": "Fulfill a user's password reset request. Password reset tokens expire 24 hours after requesting the reset.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of user",
+                    "required": true
+                },
+                {
+                    "name": "passwordResetToken",
+                    "type": "String",
+                    "info": "The password reset token emailed to the user.",
+                    "required": true
+                },
+                {
+                    "name": "newPassword",
+                    "type": "String",
+                    "info": "The new password for the user.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users\/{$data['userId']}\/actions\/reset-password",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "meta": {
+                            "passwordResetToken": "{passwordResetToken}",
+                            "newPassword": "{newPassword}"
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "meta"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addLicense",
+            "description": "Creates a new license resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "key",
+                    "type": "String",
+                    "info": "A unique pre-determined key for the license. Cannot be used on encrypted licenses. This attribute will be automatically generated or popped from the remaining pool if left blank.",
+                    "required": false
+                },
+                {
+                    "name": "suspended",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not the license is suspended.",
+                    "required": true
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing license metadata.",
+                    "required": false
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "The policy to implement for the license",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "The user the license is for. If ommitted, the license will be user-less. ",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "licenses",
+                            "attributes": {
+                                "key": "{key}",
+                                "suspended": "{suspended}",
+                                "metadata": "{metadata}"
+                            },
+                            "relationships": {
+                                "policy": {
+                                    "data": {
+                                        "type": "policies",
+                                        "id": "{policyId}"
+                                    }
+                                },
+                                "user": {
+                                    "data": {
+                                        "type": "users",
+                                        "id": "{userId}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleLicense",
+            "description": "Retrieves the details of an existing license.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateLicense",
+            "description": "Updates the details of an existing license.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                },
+                {
+                    "name": "expiry",
+                    "type": "DatePicker",
+                    "info": "When the license will expire.",
+                    "required": false
+                },
+                {
+                    "name": "suspended",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not the license is suspended.",
+                    "required": true
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing license metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "licenses",
+                            "attributes": {
+                                "expiry": "{expiry}",
+                                "suspended": "{suspended}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteLicense",
+            "description": "Deletes an existing license.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listLicenses",
+            "description": "Returns a list of licenses. The licenses are returned sorted by creation date, with the most recent licenses appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of licenses to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                },
+                {
+                    "name": "user",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the user to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "product",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the product to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "policy",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the policy to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "machine",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the machine to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "suspended",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not the license is suspended.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]",
+                            "user",
+                            "product",
+                            "policy",
+                            "machine",
+                            "suspended"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "validateLicense",
+            "description": "Action to validate a license. This will check the following: if the license is suspended, if the license is expired, if the license is overdue for check-in, and if the license meets its machine requirements (if strict).",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/validate",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "validateLicenseKey",
+            "description": "Action to validate a license key. This will look up the license by its key and check the following: if the license is suspended, if the license is expired, if the license is overdue for check-in, and if the license meets its machine requirements (if strict).",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                },
+                {
+                    "name": "key",
+                    "type": "String",
+                    "info": "Key to validate",
+                    "required": true
+                },
+                {
+                    "name": "encrypted",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether the license implements an encrypted policy. Encrypted licenses will fail validation unless this is specified.",
+                    "required": false
+                },
+                {
+                    "name": "productId",
+                    "type": "String",
+                    "info": "Id of product",
+                    "required": false
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "Id of policy",
+                    "required": false
+                },
+                {
+                    "name": "machineId",
+                    "type": "String",
+                    "info": "Id of machine",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/validate-key",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "meta": {
+                            "key": "{key}",
+                            "encrypted": "{encrypted}",
+                            "scope": {
+                                "product": {
+                                    "data": {
+                                        "type": "products",
+                                        "id": "{productId}"
+                                    }
+                                },
+                                "policy": {
+                                    "data": {
+                                        "type": "policies",
+                                        "id": "{policyId}"
+                                    }
+                                },
+                                "machine": {
+                                    "data": {
+                                        "type": "machines",
+                                        "id": "{machineId}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "meta"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "suspendLicense",
+            "description": "Action to temporarily suspend (ban) a license. This will cause the license to fail validation until reinistated. ",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/suspend",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "reinstateLicense",
+            "description": "Action to reinstate a suspended license.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/reinstate",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "renewLicense",
+            "description": "Action to renew a license. Extends license expiry by the policy's duration.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/renew",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "revokeLicense",
+            "description": "Action to revoke (delete) a license. This cannot be undone. This action also immediately deletes any machines that the license is associated with.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/revoke",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "checkinLicense",
+            "description": "Action to check-in a license. Sets the license's lastCheckIn to the current time, and the license's nextCheckIn according to the policy's check-in interval.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "licenseId",
+                    "type": "String",
+                    "info": "Id of license",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}\/actions\/check-in",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addMachine",
+            "description": "Creates a new machine resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "fingerprint",
+                    "type": "String",
+                    "info": "The fingerprint of the machine. This can be an arbitrary string, but must be unique within the scope of the license it belongs to.",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the machine",
+                    "required": false
+                },
+                {
+                    "name": "ip",
+                    "type": "String",
+                    "info": "IP of the machine",
+                    "required": false
+                },
+                {
+                    "name": "hostname",
+                    "type": "String",
+                    "info": "Hostname of the machine",
+                    "required": false
+                },
+                {
+                    "name": "platform",
+                    "type": "String",
+                    "info": "Platform of the machine",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing machine metadata.",
+                    "required": false
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "The license the machine is for.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/machines",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "machines",
+                            "attributes": {
+                                "fingerprint": "{fingerprint}",
+                                "name": "{name}",
+                                "ip": "{ip}",
+                                "hostname": "{hostname}",
+                                "platform": "{platform}",
+                                "metadata": "{metadata}"
+                            },
+                            "relationships": {
+                                "policy": {
+                                    "data": {
+                                        "type": "policies",
+                                        "id": "{policyId}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleMachine",
+            "description": "Retrieves the details of an existing machine.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "machineId",
+                    "type": "String",
+                    "info": "Id of machine",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/machines\/{$data['machineId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateMachine",
+            "description": "Updates the details of an existing machine.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "machineId",
+                    "type": "String",
+                    "info": "Id of machine",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the machine",
+                    "required": false
+                },
+                {
+                    "name": "ip",
+                    "type": "String",
+                    "info": "IP of the machine",
+                    "required": false
+                },
+                {
+                    "name": "hostname",
+                    "type": "String",
+                    "info": "Hostname of the machine",
+                    "required": false
+                },
+                {
+                    "name": "platform",
+                    "type": "String",
+                    "info": "Platform of the machine",
+                    "required": false
+                },
+                {
+                    "name": "metadata",
+                    "type": "String",
+                    "info": "Hash containing machine metadata.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/machines\/{$data['machineId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "machines",
+                            "attributes": {
+                                "name": "{name}",
+                                "ip": "{ip}",
+                                "hostname": "{hostname}",
+                                "platform": "{platform}",
+                                "metadata": "{metadata}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteMachine",
+            "description": "Deletes an existing machine.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "machineId",
+                    "type": "String",
+                    "info": "Id of machine",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/machines\/{$data['machineId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listMachines",
+            "description": "Returns a list of machines. The machines are returned sorted by creation date, with the most recent machines appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of machines to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                },
+                {
+                    "name": "product",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the product to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "fingerprint",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the fingerprint to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "license",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the license to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "user",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the user to filter by.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/machines",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]",
+                            "product",
+                            "fingerprint",
+                            "license",
+                            "user"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addKey",
+            "description": "Creates a new key resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "key",
+                    "type": "String",
+                    "info": "The unique key string for the key. The key cannot collide with license keys that already exist.",
+                    "required": true
+                },
+                {
+                    "name": "policyId",
+                    "type": "String",
+                    "info": "The license the machine is for.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/keys",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "keys",
+                            "attributes": {
+                                "key": "{key}"
+                            },
+                            "relationships": {
+                                "policy": {
+                                    "data": {
+                                        "type": "policies",
+                                        "id": "{policyId}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleKey",
+            "description": "Retrieves the details of an existing key.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "keyId",
+                    "type": "String",
+                    "info": "Id of key",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/keys\/{$data['keyId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateKey",
+            "description": "Updates the details of an existing key.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "keyId",
+                    "type": "String",
+                    "info": "Id of key",
+                    "required": true
+                },
+                {
+                    "name": "key",
+                    "type": "String",
+                    "info": "The unique key string for the key. The key cannot collide with license keys that already exist.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/keys\/{$data['keyId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "keys",
+                            "attributes": {
+                                "key": "{key}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteKey",
+            "description": "Delete an existing key.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "keyId",
+                    "type": "String",
+                    "info": "Id of key",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/keys\/{$data['keyId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listKeys",
+            "description": "Returns a list of keys. The keys are returned sorted by creation date, with the most recent keys appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of keys to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                },
+                {
+                    "name": "product",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the product to filter by.",
+                    "required": false
+                },
+                {
+                    "name": "policy",
+                    "type": "String",
+                    "info": "The identifier (UUID) of the policy to filter by.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/keys",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]",
+                            "product",
+                            "policy"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addWebhook",
+            "description": "Creates a new webhook resource.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "type": "String",
+                    "info": "The url that events are dispatched to. Must use the https protocol.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-endpoints",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "webhook-endpoints",
+                            "attributes": {
+                                "url": "{url}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleWebhook",
+            "description": "Retrieves the details of an existing webhook.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Id of webhook",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-endpoints\/{$data['webhookId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateWebhook",
+            "description": "Updates the details of an existing webhook.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Id of webhook",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "type": "String",
+                    "info": "The url that events are dispatched to. Must use the https protocol.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-endpoints\/{$data['webhookId']}",
+                "method": "put",
+                "vendorFieldsStructure": [
+                    {
+                        "data": {
+                            "type": "webhook-endpoints",
+                            "attributes": {
+                                "url": "{url}"
+                            }
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "data"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteWebhok",
+            "description": "Deletes an existing webhook.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Id of webhook",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-endpoints\/{$data['webhookId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWebhooks",
+            "description": "Returns a list of webhooks. The webhooks are returned sorted by creation date, with the most recent webhooks appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of webhooks to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-endpoints",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleWebhookEvent",
+            "description": "Retrieves the details of an existing webhook event.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "webhookEventId",
+                    "type": "String",
+                    "info": "Id of webhook event",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-events\/{$data['webhookEventId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWebhooksEvetns",
+            "description": "Returns a list of webhook events. The webhook events are returned sorted by creation date, with the most recent webhook events appearing first.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit on the number of webhooks to be returned. Limit must be a number between 1 and 100.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "Page size must be a number between 1 and 100",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[size]"
+                    }
+                },
+                {
+                    "name": "pageNumber",
+                    "type": "Number",
+                    "info": "Number of the page",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "page[number]"
+                    }
+                },
+                {
+                    "name": "events",
+                    "type": "List",
+                    "structure": {
+                        "name": "event",
+                        "type": "String",
+                        "info": "Single event type"
+                    },
+                    "info": "Array containing events to filter by.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-events",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "limit",
+                            "page[size]",
+                            "page[number]"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "retryEvent",
+            "description": "Action to manually retry an event. This creates a new event resource with an identical idempotency token.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "webhookEventId",
+                    "type": "String",
+                    "info": "Id of webhook event",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-events\/{$data['webhookEventId']}\/actions\/retry",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCurrentProfile",
+            "description": "Retrieves the details of the currently authenticated bearer.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/profile",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "resetPassworda",
+            "description": "Request a password reset for a user. This will send an email to the user, if it is a valid email address. The email will contain a link leading to a password reset form securely hosted by Keygen.",
+            "args": [
+                {
+                    "name": "accountId",
+                    "type": "credentials",
+                    "info": "Your account id",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Your access token",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The email of the user.",
+                    "required": true
+                },
+                {
+                    "name": "deliver",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether or not to email a password reset notification to the user. When false, you will need to listen for the user.password-reset webhook event and implement the fulfillment logic yourself.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/passwords",
+                "method": "post",
+                "vendorFieldsStructure": [
+                    {
+                        "meta": {
+                            "email": "email",
+                            "deliver": "deliver"
+                        }
+                    }
+                ],
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "meta"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Authorization": "Bearer {$data['accessToken']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
