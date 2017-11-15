@@ -13,7 +13,7 @@ $app->post('/api/Keygen/updateUser', function ($request, $response) {
     }
 
     $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','userId'=>'userId'];
-    $optionalParams = ['firstName'=>'firstName','lastName'=>'lastName','email'=>'email','password'=>'password','role'=>'role','metadata'=>'metadata'];
+    $optionalParams = ['firstName'=>'firstName','lastName'=>'lastName','email'=>'email','role'=>'role','metadata'=>'metadata'];
     $bodyParams = [
        'json' => ['data']
     ];
@@ -29,7 +29,6 @@ $app->post('/api/Keygen/updateUser', function ($request, $response) {
 $data['data']['attributes']['firstName'] = $data['firstName'];
 $data['data']['attributes']['lastName'] = $data['lastName'];
 $data['data']['attributes']['email'] = $data['email'];
-$data['data']['attributes']['password'] = $data['password'];
 $data['data']['attributes']['role'] = $data['role'];
 $data['data']['attributes']['metadata'] = $data['metadata'];
 

@@ -234,7 +234,6 @@ Updates the details of an existing user.
 | firstName  | String     | The first name of the user.
 | lastName   | String     | The last name of the user.
 | email      | String     | The email of the user.
-| password   | String     | The password of the user.
 | role       | Select     | The role of the user.
 | metadata   | String     | Hash containing user metadata.
 

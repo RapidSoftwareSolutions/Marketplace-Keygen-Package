@@ -1244,12 +1244,7 @@
                     "info": "The email of the user.",
                     "required": false
                 },
-                {
-                    "name": "password",
-                    "type": "String",
-                    "info": "The password of the user.",
-                    "required": false
-                },
+
                 {
                     "name": "role",
                     "type": "Select",
@@ -1278,7 +1273,6 @@
                                 "firstName": "{firstName}",
                                 "lastName": "{lastName}",
                                 "email": "{email}",
-                                "password": "{password}",
                                 "role": "{role}",
                                 "metadata": "{metadata}"
                             }
