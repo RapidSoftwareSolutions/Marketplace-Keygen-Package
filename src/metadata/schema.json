@@ -396,7 +396,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/products\/{$data['productId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {
@@ -873,7 +873,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/policies\/{$data['policyId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {
@@ -1244,7 +1244,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/users\/{$data['userId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {
@@ -1733,7 +1733,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/licenses\/{$data['licenseId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {
@@ -2528,7 +2528,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/machines\/{$data['machineId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {
@@ -2861,7 +2861,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/keys\/{$data['keyId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {
@@ -3162,7 +3162,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.keygen.sh\/v1\/accounts\/{$data['accountId']}\/webhook-endpoints\/{$data['webhookId']}",
-                "method": "put",
+                "method": "patch",
                 "vendorFieldsStructure": [
                     {
                         "data": {

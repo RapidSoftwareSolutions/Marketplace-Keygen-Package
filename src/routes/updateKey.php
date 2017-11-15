@@ -33,7 +33,7 @@ $data['data']['attributes']['key'] = $data['key'];
      
 
     try {
-        $resp = $client->put($query_str, $requestParams);
+        $resp = $client->patch($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
