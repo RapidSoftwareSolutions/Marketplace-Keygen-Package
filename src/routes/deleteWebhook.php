@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/Keygen/deleteWebhok', function ($request, $response) {
+$app->post('/api/Keygen/deleteWebhook', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

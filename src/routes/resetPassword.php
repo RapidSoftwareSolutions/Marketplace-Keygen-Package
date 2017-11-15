@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/Keygen/resetPassworda', function ($request, $response) {
+$app->post('/api/Keygen/resetPassword', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

@@ -37,7 +37,7 @@ A dead-simple software licensing API built for developers
   | projectName     | credentials| Your RapidAPI project name
   | projectKey | credentials     | Your RapidAPI project key
   
-
+  
 ## Keygen.getAccessToken
 Generate a new token resource for a user.
 
@@ -522,10 +522,6 @@ Returns a list of keys. The keys are returned sorted by creation date, with the 
 
 ## Keygen.addWebhook
 Creates a new webhook resource.
-You can use our service as url: 
-   ```
-   https://webhooks.rapidapi.io/api/message/Keygen/webhookEvent/{projectName}/{projectKey} * see credentials description above
-   ```
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -544,11 +540,7 @@ Retrieves the details of an existing webhook.
 
 ## Keygen.updateWebhook
 Updates the details of an existing webhook.
-You can use our service as url: 
-   ```
-   https://webhooks.rapidapi.io/api/message/Keygen/webhookEvent/{projectName}/{projectKey} * see credentials description above
-   ```
-   
+
 | Field      | Type       | Description
 |------------|------------|----------
 | accountId  | credentials| Your account id
@@ -556,7 +548,7 @@ You can use our service as url:
 | webhookId  | String     | Id of webhook
 | url        | String     | The url that events are dispatched to. Must use the https protocol.
 
-## Keygen.deleteWebhok
+## Keygen.deleteWebhook
 Deletes an existing webhook.
 
 | Field      | Type       | Description
@@ -585,7 +577,7 @@ Retrieves the details of an existing webhook event.
 | accessToken   | String     | Your access token
 | webhookEventId| String     | Id of webhook event
 
-## Keygen.listWebhooksEvetns
+## Keygen.listWebhooksEvents
 Returns a list of webhook events. The webhook events are returned sorted by creation date, with the most recent webhook events appearing first.
 
 | Field      | Type       | Description
@@ -614,7 +606,7 @@ Retrieves the details of the currently authenticated bearer.
 | accountId  | credentials| Your account id
 | accessToken| String     | Your access token
 
-## Keygen.resetPassworda
+## Keygen.resetPassword
 Request a password reset for a user. This will send an email to the user, if it is a valid email address. The email will contain a link leading to a password reset form securely hosted by Keygen.
 
 | Field      | Type       | Description

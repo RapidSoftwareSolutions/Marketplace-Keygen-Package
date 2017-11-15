@@ -1590,7 +1590,7 @@
                         "false"
                     ],
                     "info": "Whether or not the license is suspended.",
-                    "required": true
+                    "required": false
                 },
                 {
                     "name": "metadata",
@@ -3218,7 +3218,7 @@
             ]
         },
         {
-            "name": "deleteWebhok",
+            "name": "deleteWebhook",
             "description": "Deletes an existing webhook.",
             "args": [
                 {
@@ -3381,7 +3381,7 @@
             ]
         },
         {
-            "name": "listWebhooksEvetns",
+            "name": "listWebhooksEvents",
             "description": "Returns a list of webhook events. The webhook events are returned sorted by creation date, with the most recent webhook events appearing first.",
             "args": [
                 {
@@ -3549,7 +3549,7 @@
             ]
         },
         {
-            "name": "resetPassworda",
+            "name": "resetPassword",
             "description": "Request a password reset for a user. This will send an email to the user, if it is a valid email address. The email will contain a link leading to a password reset form securely hosted by Keygen.",
             "args": [
                 {

@@ -48,13 +48,13 @@ $routes = [
     'addWebhook',
     'getSingleWebhook',
     'updateWebhook',
-    'deleteWebhok',
+    'deleteWebhook',
     'listWebhooks',
     'getSingleWebhookEvent',
-    'listWebhooksEvetns',
+    'listWebhooksEvents',
     'retryEvent',
     'getCurrentProfile',
-    'resetPassworda'
+    'resetPassword'
 ];
 foreach($routes as $file) {
     require __DIR__ . '/../src/routes/'.$file.'.php';

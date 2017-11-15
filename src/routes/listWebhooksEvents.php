@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/Keygen/listWebhooksEvetns', function ($request, $response) {
+$app->post('/api/Keygen/listWebhooksEvents', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
