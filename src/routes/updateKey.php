@@ -15,7 +15,7 @@ $app->post('/api/Keygen/updateKey', function ($request, $response) {
     $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','keyId'=>'keyId','key'=>'key'];
     $optionalParams = [];
     $bodyParams = [
-       'json' => ['']
+       'json' => ['data']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

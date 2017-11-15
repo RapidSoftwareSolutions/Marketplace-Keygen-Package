@@ -2397,6 +2397,7 @@
                 },
                 {
                     "name": "licenseId",
+                    "name": "licenseId",
                     "type": "String",
                     "info": "The license the machine is for.",
                     "required": true
@@ -2900,7 +2901,9 @@
                 "requestParameters": [
                     {
                         "type": "json",
-                        "parameters": []
+                        "parameters": [
+                            "data"
+                        ]
                     }
                 ],
                 "headers": {
