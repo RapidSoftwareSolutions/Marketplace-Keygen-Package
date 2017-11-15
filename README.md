@@ -420,7 +420,7 @@ Creates a new machine resource.
 | hostname   | String     | Hostname of the machine
 | platform   | String     | Platform of the machine
 | metadata   | String     | Hash containing machine metadata.
-| policyId   | String     | The license the machine is for.
+| licenseId   | String     | The license the machine is for.
 
 ## Keygen.getSingleMachine
 Retrieves the details of an existing machine.

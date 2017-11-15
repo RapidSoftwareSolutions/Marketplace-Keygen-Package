@@ -4,7 +4,7 @@ $app->post('/api/Keygen/addMachine', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accountId','accessToken','fingerprint','policyId']);
+    $validateRes = $checkRequest->validate($request, ['accountId','accessToken','fingerprint','licenseId']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Keygen/addMachine', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','fingerprint'=>'fingerprint','policyId'=>'policyId'];
+    $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','fingerprint'=>'fingerprint','licenseId'=>'licenseId'];
     $optionalParams = ['name'=>'name','ip'=>'ip','hostname'=>'hostname','platform'=>'platform','metadata'=>'metadata'];
     $bodyParams = [
        'json' => ['data']
@@ -32,8 +32,8 @@ $data['data']['attributes']['ip'] = $data['ip'];
 $data['data']['attributes']['hostname'] = $data['hostname'];
 $data['data']['attributes']['platform'] = $data['platform'];
 $data['data']['attributes']['metadata'] = $data['metadata'];
-$data['data']['relationships']['policy']['data']['type'] = 'policies';
-$data['data']['relationships']['policy']['data']['id'] = $data['policyId'];
+$data['data']['relationships']['license']['data']['type'] = 'licenses';
+$data['data']['relationships']['license']['data']['id'] = $data['licenseId'];
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Authorization"=>"Bearer {$data['accessToken']}"];

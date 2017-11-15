@@ -15,7 +15,7 @@ $app->post('/api/Keygen/updateUser', function ($request, $response) {
     $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','userId'=>'userId'];
     $optionalParams = ['firstName'=>'firstName','lastName'=>'lastName','email'=>'email','password'=>'password','role'=>'role','metadata'=>'metadata'];
     $bodyParams = [
-       'json' => ['']
+       'json' => ['data']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
