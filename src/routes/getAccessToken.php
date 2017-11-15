@@ -19,8 +19,7 @@ $app->post('/api/Keygen/getAccessToken', function ($request, $response) {
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
-
-    
+$data['credentials'] = base64_encode($post_data['args']['email'].':'.$post_data['args']['password']);
 
     $client = $this->httpClient;
     $query_str = "https://api.keygen.sh/v1/accounts/{$data['accountId']}/tokens";
@@ -28,7 +27,7 @@ $app->post('/api/Keygen/getAccessToken', function ($request, $response) {
     
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
-    $requestParams['headers'] = ["Authorization"=>"Bearer {$data['credentials']}"];
+    $requestParams['headers'] = ["Authorization"=>"Basic {$data['credentials']}"];
      
 
     try {

@@ -55,7 +55,7 @@
                     }
                 ],
                 "headers": {
-                    "Authorization": "Bearer {$data['credentials']}"
+                    "Authorization": "Basic {$data['credentials']}"
                 }
             },
             "callbacks": [
