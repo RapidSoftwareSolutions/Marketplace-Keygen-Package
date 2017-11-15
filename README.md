@@ -173,9 +173,7 @@ Updates the details of an existing policy.
 | requireCheckIn      | Select     | When enabled, a license that implements the policy will require check-in at a predefined interval to continue to pass validation i.e. if a license misses a check-in, it will be invalidated.
 | checkInInterval     | String     | One of day, week, month or year. The frequency at which a license should check-in.
 | checkInIntervalCount| Number     | The number of intervals (specified in the check-in interval property) between each required check-in. 
-| usePool             | Select     | Whether or not to pull license keys from a finite pool of pre-determined keys. 
 | maxMachines         | Number     | The maximum number of machines a license implementing the policy can activate per-user. This is only enforced when the policy is strict. 
-| encrypted           | Select     | Whether or not to encrypt license keys. 
 | protected           | Select     | Whether or not the policy is protected
 | metadata            | String     | Hash containing policy metadata.
 

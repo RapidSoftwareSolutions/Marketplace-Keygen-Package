@@ -13,7 +13,7 @@ $app->post('/api/Keygen/updatePolicy', function ($request, $response) {
     }
 
     $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','policyId'=>'policyId'];
-    $optionalParams = ['name'=>'name','duration'=>'duration','strict'=>'strict','floating'=>'floating','requireCheckIn'=>'requireCheckIn','checkInInterval'=>'checkInInterval','checkInIntervalCount'=>'checkInIntervalCount','usePool'=>'usePool','maxMachines'=>'maxMachines','encrypted'=>'encrypted','protected'=>'protected','metadata'=>'metadata'];
+    $optionalParams = ['name'=>'name','duration'=>'duration','strict'=>'strict','floating'=>'floating','requireCheckIn'=>'requireCheckIn','checkInInterval'=>'checkInInterval','checkInIntervalCount'=>'checkInIntervalCount','maxMachines'=>'maxMachines','protected'=>'protected','metadata'=>'metadata'];
     $bodyParams = [
        'json' => ['data']
     ];
@@ -33,9 +33,7 @@ $data['data']['attributes']['floating'] = $data['floating'];
 $data['data']['attributes']['requireCheckIn'] = $data['requireCheckIn'];
 $data['data']['attributes']['checkInInterval'] = $data['checkInInterval'];
 $data['data']['attributes']['checkInIntervalCount'] = $data['checkInIntervalCount'];
-$data['data']['attributes']['usePool'] = $data['usePool'];
 $data['data']['attributes']['maxMachines'] = $data['maxMachines'];
-$data['data']['attributes']['encrypted'] = $data['encrypted'];
 $data['data']['attributes']['protected'] = $data['protected'];
 $data['data']['attributes']['metadata'] = $data['metadata'];
 

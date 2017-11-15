@@ -846,32 +846,14 @@
                     "info": "The number of intervals (specified in the check-in interval property) between each required check-in. ",
                     "required": false
                 },
-                {
-                    "name": "usePool",
-                    "type": "Select",
-                    "options": [
-                        "true",
-                        "false"
-                    ],
-                    "info": "Whether or not to pull license keys from a finite pool of pre-determined keys. ",
-                    "required": false
-                },
+
                 {
                     "name": "maxMachines",
                     "type": "Number",
                     "info": "The maximum number of machines a license implementing the policy can activate per-user. This is only enforced when the policy is strict. ",
                     "required": false
                 },
-                {
-                    "name": "encrypted",
-                    "type": "Select",
-                    "options": [
-                        "true",
-                        "false"
-                    ],
-                    "info": "Whether or not to encrypt license keys. ",
-                    "required": false
-                },
+
                 {
                     "name": "protected",
                     "type": "Select",
@@ -904,9 +886,7 @@
                                 "requireCheckIn": "{requireCheckIn}",
                                 "checkInInterval": "{checkInInterval}",
                                 "checkInIntervalCount": "{checkInIntervalCount}",
-                                "usePool": "{usePool}",
                                 "maxMachines": "{maxMachines}",
-                                "encrypted": "{encrypted}",
                                 "protected": "{protected}",
                                 "metadata": "{metadata}"
                             }
@@ -1742,7 +1722,7 @@
                         "false"
                     ],
                     "info": "Whether or not the license is suspended.",
-                    "required": true
+                    "required": false
                 },
                 {
                     "name": "metadata",
