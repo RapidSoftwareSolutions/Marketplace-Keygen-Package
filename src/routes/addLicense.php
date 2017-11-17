@@ -27,12 +27,14 @@ $app->post('/api/Keygen/addLicense', function ($request, $response) {
 
     $data['data']['type'] = 'licenses';
 $data['data']['attributes']['key'] = $data['key'];
-$data['data']['attributes']['suspended'] = $data['suspended'];
+$data['data']['attributes']['suspended'] = (bool)$data['suspended'];
 $data['data']['attributes']['metadata'] = $data['metadata'];
 $data['data']['relationships']['policy']['data']['type'] = 'policies';
 $data['data']['relationships']['policy']['data']['id'] = $data['policyId'];
-$data['data']['relationships']['user']['data']['type'] = 'users';
-$data['data']['relationships']['user']['data']['id'] = $data['userId'];
+if (isset($data['userId']) && strlen($data['userId']) > 0) {
+    $data['data']['relationships']['user']['data']['type'] = 'users';
+    $data['data']['relationships']['user']['data']['id'] = $data['userId'];
+}
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Authorization"=>"Bearer {$data['accessToken']}"];

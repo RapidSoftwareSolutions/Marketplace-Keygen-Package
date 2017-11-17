@@ -3566,8 +3566,8 @@
                 "vendorFieldsStructure": [
                     {
                         "meta": {
-                            "email": "email",
-                            "deliver": "deliver"
+                            "email": "{email}",
+                            "deliver": "{deliver}"
                         }
                     }
                 ],

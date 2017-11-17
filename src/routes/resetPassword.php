@@ -25,8 +25,8 @@ $app->post('/api/Keygen/resetPassword', function ($request, $response) {
     $client = $this->httpClient;
     $query_str = "https://api.keygen.sh/v1/accounts/{$data['accountId']}/passwords";
 
-    $data['meta']['email'] = 'email';
-$data['meta']['deliver'] = 'deliver';
+    $data['meta']['email'] = $data['email'];
+$data['meta']['deliver'] = (bool)$data['deliver'];
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Authorization"=>"Bearer {$data['accessToken']}"];

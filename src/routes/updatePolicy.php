@@ -27,14 +27,14 @@ $app->post('/api/Keygen/updatePolicy', function ($request, $response) {
 
     $data['data']['type'] = 'policies';
 $data['data']['attributes']['name'] = $data['name'];
-$data['data']['attributes']['duration'] = $data['duration'];
-$data['data']['attributes']['strict'] = $data['strict'];
-$data['data']['attributes']['floating'] = $data['floating'];
-$data['data']['attributes']['requireCheckIn'] = $data['requireCheckIn'];
+    $data['data']['attributes']['duration'] = (int) $data['duration'];
+    $data['data']['attributes']['strict'] = (bool)$data['strict'];
+    $data['data']['attributes']['floating'] = (bool)$data['floating'];
+    $data['data']['attributes']['requireCheckIn'] = (bool)$data['requireCheckIn'];
 $data['data']['attributes']['checkInInterval'] = $data['checkInInterval'];
-$data['data']['attributes']['checkInIntervalCount'] = $data['checkInIntervalCount'];
-$data['data']['attributes']['maxMachines'] = $data['maxMachines'];
-$data['data']['attributes']['protected'] = $data['protected'];
+$data['data']['attributes']['checkInIntervalCount'] = (int)$data['checkInIntervalCount'];
+$data['data']['attributes']['maxMachines'] = (int)$data['maxMachines'];
+$data['data']['attributes']['protected'] = (bool) $data['protected'];
 $data['data']['attributes']['metadata'] = $data['metadata'];
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
