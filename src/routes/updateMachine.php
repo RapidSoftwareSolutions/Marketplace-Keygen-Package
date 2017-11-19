@@ -37,9 +37,7 @@ $app->post('/api/Keygen/updateMachine', function ($request, $response) {
     if (isset($data['platform']) && strlen($data['platform']) > 0) {
         $data['data']['attributes']['platform'] = $data['platform'];
     }
-    if (isset($data['metadata']) && strlen($data['metadata']) > 0) {
         $data['data']['attributes']['metadata'] = $data['metadata'];
-    }
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Authorization" => "Bearer {$data['accessToken']}"];

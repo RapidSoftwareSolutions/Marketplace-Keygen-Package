@@ -27,7 +27,7 @@ $app->post('/api/Keygen/updateLicense', function ($request, $response) {
 
     $data['data']['type'] = 'licenses';
 $data['data']['attributes']['expiry'] = $data['expiry'];
-$data['data']['attributes']['suspended'] = (bool)$data['suspended'];
+$data['data']['attributes']['suspended'] = $data['suspended'] == "true" ? true : false;
 $data['data']['attributes']['metadata'] = $data['metadata'];
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);

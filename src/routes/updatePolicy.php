@@ -4,51 +4,47 @@ $app->post('/api/Keygen/updatePolicy', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accountId','accessToken','policyId']);
+    $validateRes = $checkRequest->validate($request, ['accountId', 'accessToken', 'policyId']);
 
-    if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
+    if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
     } else {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['accountId'=>'accountId','accessToken'=>'accessToken','policyId'=>'policyId'];
-    $optionalParams = ['name'=>'name','duration'=>'duration','strict'=>'strict','floating'=>'floating','requireCheckIn'=>'requireCheckIn','checkInInterval'=>'checkInInterval','checkInIntervalCount'=>'checkInIntervalCount','maxMachines'=>'maxMachines','protected'=>'protected','metadata'=>'metadata'];
+    $requiredParams = ['accountId' => 'accountId', 'accessToken' => 'accessToken', 'policyId' => 'policyId'];
+    $optionalParams = ['name' => 'name', 'duration' => 'duration', 'strict' => 'strict', 'floating' => 'floating', 'requireCheckIn' => 'requireCheckIn', 'checkInInterval' => 'checkInInterval', 'checkInIntervalCount' => 'checkInIntervalCount', 'maxMachines' => 'maxMachines', 'protected' => 'protected', 'metadata' => 'metadata'];
     $bodyParams = [
-       'json' => ['data']
+        'json' => ['data']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
-    
 
     $client = $this->httpClient;
     $query_str = "https://api.keygen.sh/v1/accounts/{$data['accountId']}/policies/{$data['policyId']}";
 
     $data['data']['type'] = 'policies';
-$data['data']['attributes']['name'] = $data['name'];
-    $data['data']['attributes']['duration'] = (int) $data['duration'];
-    $data['data']['attributes']['strict'] = (bool)$data['strict'];
-    $data['data']['attributes']['floating'] = (bool)$data['floating'];
-    $data['data']['attributes']['requireCheckIn'] = (bool)$data['requireCheckIn'];
-$data['data']['attributes']['checkInInterval'] = $data['checkInInterval'];
-$data['data']['attributes']['checkInIntervalCount'] = (int)$data['checkInIntervalCount'];
-$data['data']['attributes']['maxMachines'] = (int)$data['maxMachines'];
-$data['data']['attributes']['protected'] = (bool) $data['protected'];
-$data['data']['attributes']['metadata'] = $data['metadata'];
-
+    $data['data']['attributes']['name'] = $data['name'];
+    $data['data']['attributes']['duration'] = (int)$data['duration'];
+    $data['data']['attributes']['strict'] = $data['strict'] == "true" ? true : false;
+    $data['data']['attributes']['floating'] = $data['floating'] == "true" ? true : false;
+    $data['data']['attributes']['requireCheckIn'] = $data['requireCheckIn'] == "true" ? true : false;
+    $data['data']['attributes']['checkInInterval'] = $data['checkInInterval'];
+    $data['data']['attributes']['checkInIntervalCount'] = (int)$data['checkInIntervalCount'];
+    $data['data']['attributes']['maxMachines'] = (int)$data['maxMachines'];
+    $data['data']['attributes']['protected'] = $data['protected'] == "true" ? true : false;
+    $data['data']['attributes']['metadata'] = $data['metadata'];
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
-    $requestParams['headers'] = ["Authorization"=>"Bearer {$data['accessToken']}"];
-     
-
+    $requestParams['headers'] = ["Authorization" => "Bearer {$data['accessToken']}"];
     try {
         $resp = $client->patch($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if (in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
-            if(empty($result['contextWrites']['to'])) {
+            if (empty($result['contextWrites']['to'])) {
                 $result['contextWrites']['to']['status_msg'] = "Api return no results";
             }
         } else {
@@ -60,7 +56,7 @@ $data['data']['attributes']['metadata'] = $data['metadata'];
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
         $responseBody = $exception->getResponse()->getBody()->getContents();
-        if(empty(json_decode($responseBody))) {
+        if (empty(json_decode($responseBody))) {
             $out = $responseBody;
         } else {
             $out = json_decode($responseBody);
@@ -72,7 +68,7 @@ $data['data']['attributes']['metadata'] = $data['metadata'];
     } catch (GuzzleHttp\Exception\ServerException $exception) {
 
         $responseBody = $exception->getResponse()->getBody()->getContents();
-        if(empty(json_decode($responseBody))) {
+        if (empty(json_decode($responseBody))) {
             $out = $responseBody;
         } else {
             $out = json_decode($responseBody);

@@ -27,7 +27,7 @@ $app->post('/api/Keygen/addLicense', function ($request, $response) {
 
     $data['data']['type'] = 'licenses';
 $data['data']['attributes']['key'] = $data['key'];
-$data['data']['attributes']['suspended'] = (bool)$data['suspended'];
+$data['data']['attributes']['suspended'] = $data['suspended'] == "true" ? true : false;
 $data['data']['attributes']['metadata'] = $data['metadata'];
 $data['data']['relationships']['policy']['data']['type'] = 'policies';
 $data['data']['relationships']['policy']['data']['id'] = $data['policyId'];
