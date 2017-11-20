@@ -19,7 +19,7 @@
         "Browse to https://keygen.sh",
         "Register or log in",
         "Browse to https://app.keygen.sh/settings to get your accountId",
-        "Use getAccessToken to generate your access toke"
+        "Use getAccessToken to generate your access token"
     ],
     "blocks": [
         {
